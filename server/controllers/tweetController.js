@@ -3,6 +3,15 @@ const Tweet = require('../models/Tweet');
 const Comment = require('../models/Comment');
 const Notification = require('../models/Notification');
 
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+
 // @desc    Get all tweets (Sorted by Following + Chronological)
 // @route   GET /api/tweets
 const getTweets = async (req, res) => {
@@ -54,6 +63,7 @@ const getTweets = async (req, res) => {
                 $project: {
                     _id: 1, 
                     content: 1, 
+                    image: { $ifNull: ["$image", null] },
                     likes: 1, 
                     createdAt: 1, 
                     isFollowing: 1,
@@ -75,24 +85,40 @@ const getTweets = async (req, res) => {
     }
 };
 
-// @desc    Create a tweet
+// @desc    Create a new tweet (with optional image)
 // @route   POST /api/tweets
 const createTweet = async (req, res) => {
-    if (!req.body.content) {
-        return res.status(400).json({ message: 'Please add text content' });
+    // 1. Destructure image from body
+    const { content, image } = req.body; 
+
+    if (!content && !image) {
+        return res.status(400).json({ message: 'Content or image is required' });
     }
 
     try {
+        let imageUrl = '';
+
+        // 2. If an image is provided, upload it to Cloudinary
+        if (image) {
+            const uploadRes = await cloudinary.uploader.upload(image, {
+                folder: 'birdie_posts',      // Folder name in Cloudinary
+            });
+            imageUrl = uploadRes.secure_url;
+        }
+
+        // 3. Create Tweet in DB with the Cloudinary URL
         const tweet = await Tweet.create({
-            content: req.body.content,
-            userId: req.user.id // Comes from the protect middleware
+            userId: req.user.id,
+            content: content || "", // Allow empty text if image exists
+            image: imageUrl
         });
 
-        // Populate user info immediately so the frontend can display it
-        const populatedTweet = await tweet.populate('userId', 'username email');
-        
-        res.status(200).json(populatedTweet);
+        // 4. Populate user info so the feed can display it immediately
+        const fullTweet = await Tweet.findById(tweet._id).populate('userId', 'username email');
+
+        res.status(201).json(fullTweet);
     } catch (error) {
+        console.error("Create Tweet Error:", error);
         res.status(500).json({ message: error.message });
     }
 };

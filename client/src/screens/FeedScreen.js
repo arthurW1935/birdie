@@ -85,8 +85,7 @@ const styles = StyleSheet.create({
     headerTitle: {
         fontSize: 22,
         fontWeight: '900',
-        color: COLORS.text,
-        fontStyle: 'italic',
+        color: COLORS.text
     },
     fab: {
         position: 'absolute',

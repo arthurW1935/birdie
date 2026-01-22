@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     content: { color: COLORS.text, lineHeight: 20 },
     deleteIcon: { position: 'absolute', top: 15, right: 15, padding: 5 },
     floatingDelete: { position: 'absolute', top: 15, right: 15, backgroundColor: COLORS.surface, padding: 8, borderRadius: 20, zIndex: 10 },
-    inputContainer: { flexDirection: 'row', alignItems: 'center', padding: 10, borderTopWidth: 1, borderTopColor: COLORS.border, backgroundColor: COLORS.background },
+    inputContainer: { flexDirection: 'row', alignItems: 'center', padding: 10, borderTopWidth: 1, borderTopColor: COLORS.border, backgroundColor: COLORS.background, marginBottom: 50 },
     input: { flex: 1, color: COLORS.text, backgroundColor: COLORS.surface, borderRadius: 20, paddingHorizontal: 15, paddingVertical: 10, marginRight: 10, minHeight: 40, maxHeight: 100 },
     postText: { color: COLORS.primary, fontWeight: 'bold', fontSize: 16 }
 });

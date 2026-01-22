@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons'; // Import Ionicons
 import { AuthContext } from '../context/AuthContext';
@@ -64,6 +64,14 @@ const TweetCard = ({ item }) => {
                     </View>
                     
                     <Text style={styles.content}>{item.content}</Text>
+
+                    {item.image && (
+                        <Image 
+                            source={{ uri: item.image }} 
+                            style={styles.tweetImage}
+                            resizeMode="cover"
+                        />
+                    )}
 
                     <View style={styles.actionRow}>
                         {/* LIKE BUTTON */}
@@ -140,7 +148,15 @@ const styles = StyleSheet.create({
         fontSize: 13,
         color: COLORS.secondaryText,
         marginLeft: 5,
-    }
+    },
+    tweetImage: {
+        width: '100%',
+        height: 200,
+        borderRadius: 12,
+        marginTop: 10,
+        marginBottom: 10,
+        backgroundColor: COLORS.surface
+    },
 });
 
 export default TweetCard;
