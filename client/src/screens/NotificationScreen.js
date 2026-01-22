@@ -103,7 +103,7 @@ const NotificationScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: { flex: 1, backgroundColor: COLORS.background },
-    header: { padding: 15, borderBottomWidth: 1, borderBottomColor: COLORS.border, backgroundColor: COLORS.background },
+    header: { padding: 15, paddingTop: 45, borderBottomWidth: 1, borderBottomColor: COLORS.border, backgroundColor: COLORS.background },
     headerTitle: { fontSize: 20, fontWeight: 'bold', color: COLORS.text },
     itemContainer: { flexDirection: 'row', padding: 15, borderBottomWidth: 1, borderBottomColor: COLORS.border },
     iconContainer: { width: 40, alignItems: 'flex-end', marginRight: 10 },

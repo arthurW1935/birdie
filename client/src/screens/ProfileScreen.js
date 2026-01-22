@@ -148,7 +148,7 @@ const ProfileScreen = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: COLORS.background },
+    container: { flex: 1, backgroundColor: COLORS.background, paddingTop: 45},
     profileHeader: { padding: 20, borderBottomWidth: 1, borderBottomColor: COLORS.border },
     headerTopRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
     avatarLarge: {

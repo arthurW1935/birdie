@@ -83,7 +83,7 @@ const SearchScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: COLORS.background },
+    container: { flex: 1, backgroundColor: COLORS.background, paddingTop: 45 },
     searchContainer: {
         flexDirection: 'row',
         alignItems: 'center',

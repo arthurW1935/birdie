@@ -42,7 +42,7 @@ const FeedScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerTitle}>Birdie</Text>
+                <Text style={styles.headerTitle}>Feed</Text>
             </View>
 
             <FlatList
